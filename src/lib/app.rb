@@ -14,6 +14,8 @@ require 'sinatra/base'
 require 'singlogger'
 
 require 'level1'
+require 'level2'
+require 'level3'
 
 module Cryptorama
   class Server < Sinatra::Base
@@ -37,21 +39,26 @@ module Cryptorama
     end
 
     before do
-      session[:test] = session[:test] || ''
+      session[:level1] = { show: true,  open: true  }.merge(session[:level1] || {})
+      session[:level2] = { show: true,  open: false }.merge(session[:level2] || {})
+      session[:level3] = { show: false, open: false }.merge(session[:level3] || {})
+      session[:level4] = { show: false, open: false }.merge(session[:level4] || {})
+      session[:level5] = { show: false, open: false }.merge(session[:level5] || {})
+      session[:level6] = { show: false, open: false }.merge(session[:level6] || {})
+      session[:level7] = { show: false, open: false }.merge(session[:level7] || {})
+      session[:level8] = { show: false, open: false }.merge(session[:level8] || {})
+      session[:level9] = { show: false, open: false }.merge(session[:level9] || {})
     end
 
-    get '/a' do
-      session[:test] += 'a'
-      return 200, "This is a! #{session[:test]}"
-    end
-
-    get '/b' do
-      session[:test] += 'b'
-      return 200, "This is b! #{session[:test]}"
-    end
-
-    get '/test' do
-      erb :test
+    get '/' do
+      puts session.keys
+      erb :index, :locals => {
+        :levels => [
+          LEVEL1.merge(session[:level1] || {}),
+          LEVEL2.merge(session[:level2] || {}),
+          LEVEL3.merge(session[:level3] || {}),
+        ]
+      }
     end
   end
 end

@@ -1,0 +1,13 @@
+<p>Challenges</p>
+
+<div><%= levels %></div>
+
+<ul>
+<% levels.each do |level| %>
+  <% if level[:open] %>
+    <li><a href='<%= level[:url] %>'><%= level[:name] %></a></li>
+  <% elsif level[:show] %>
+    <li><%= level[:name] %> (not open yet!)</li>
+  <% end %>
+<% end %>
+</ul>
