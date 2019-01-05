@@ -14,7 +14,7 @@ body {
 header {
   margin-top: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #b5b5b5;
+  margin-bottom: 20px;
 }
 
 .logo-row {
@@ -34,6 +34,7 @@ content {
 }
 
 footer {
+  margin-top: 20px;
   margin-bottom: 20px;
   padding-top: 10px;
   border-top: 2px solid #b5b5b5;
