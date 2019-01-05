@@ -1,0 +1,15 @@
+<header>
+  <div class="logo-row">
+    <img src="images/logo.png" alt="logo" class="logo">
+  </div>
+</header>
+
+<ul>
+<% levels.each do |level| %>
+  <% if level[:open] %>
+    <li><a href='<%= level[:url] %>'><%= level[:name] %></a></li>
+  <% elsif level[:show] %>
+    <li><%= level[:name] %> (not open yet!)</li>
+  <% end %>
+<% end %>
+</ul>
