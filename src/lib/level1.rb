@@ -7,16 +7,23 @@ module Cryptorama
     }
 
     get '/level1' do
-      erb :level1
+      erb :level1, :locals => {
+        :completed => session[:level1][:completed]
+      }
     end
 
     post '/level1' do
       if params[:answer] == LEVEL1[:answer]
         session[:level2][:open] = true
+        session[:level1][:completed] = true
 
-        erb :success, :message => "Unlocked level 2!"
+        erb :success, :locals => {
+          :message => "Congratulations, you have completed level 1!",
+        }
       else
-        erb :failure, :message => "Sorry, that is incorrect!"
+        erb :failure, :locals => {
+          :message => "Sorry, that answer is not correct!",
+        }
       end
     end
   end
