@@ -1,4 +1,41 @@
+@font-face {
+  font-family: 'alienese';
+  src: url('/fonts/alienese.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/fonts/alienese.ttf')  format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
 body {
+  width: 90%;
+  margin: 0 auto;
   background: black;
   color: white;
+}
+
+header {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #b5b5b5;
+}
+
+.logo-row {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  text-align: center;
+}
+
+footer {
+  margin-bottom: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #b5b5b5;
+  font-family: alienese;
+}
+
+.copyright {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
