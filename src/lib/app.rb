@@ -13,6 +13,8 @@ require 'sinatra/base'
 
 require 'singlogger'
 
+require 'level1'
+
 module Cryptorama
   class Server < Sinatra::Base
     enable :sessions
