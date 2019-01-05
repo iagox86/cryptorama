@@ -48,5 +48,8 @@ module Cryptorama
       return 200, "This is b! #{session[:test]}"
     end
 
+    get '/test' do
+      erb :test
+    end
   end
 end
