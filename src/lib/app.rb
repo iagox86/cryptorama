@@ -15,6 +15,8 @@ require 'singlogger'
 
 module Cryptorama
   class Server < Sinatra::Base
+    enable :sessions
+
     def initialize(*args)
       super(*args)
 
@@ -32,12 +34,18 @@ module Cryptorama
       return 404, "Unknown path (make sure you're using get/post properly!)"
     end
 
+    before do
+      session[:test] = session[:test] || ''
+    end
+
     get '/a' do
-      return 200, 'This is a!'
+      session[:test] += 'a'
+      return 200, "This is a! #{session[:test]}"
     end
 
     get '/b' do
-      return 200, 'This is b!'
+      session[:test] += 'b'
+      return 200, "This is b! #{session[:test]}"
     end
 
   end
