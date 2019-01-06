@@ -4,6 +4,18 @@
   </div>
 <% end %>
 
+<% if message %>
+  <div class="alert alert-info" role="alert">
+    <%= message %>
+  </div>
+<% end %>
+
+<% if error %>
+  <div class="alert alert-warning" role="alert">
+    <%= error %>
+  </div>
+<% end %>
+
 <p>
   Good news everyone! The package you were supposed to deliver is missing!
 </p>
@@ -40,7 +52,7 @@
   <p><%= everything("From the desk of Dr.Z") %></p>
 </div>
 
-<div class='answer bg-light rounded'>
+<div class='answer'>
   <p>Who stole the package? (please enter the name exactly as shown on the note)</p>
 
   <%= erb :answer %>

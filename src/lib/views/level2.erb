@@ -4,18 +4,6 @@
   </div>
 <% end %>
 
-<% if message %>
-  <div class="alert alert-info" role="alert">
-    <%= message %>
-  </div>
-<% end %>
-
-<% if error %>
-  <div class="alert alert-warning" role="alert">
-    <%= error %>
-  </div>
-<% end %>
-
 <p>
   Dr. Z you say? That's bad news, really bad news indeed. Oh my...
 </p>
@@ -36,7 +24,7 @@
 </p>
 
 <p>
-  The Gizmometer has calculated the formula he's using for random numbers:
+  The Gizmomenometer has calculated the formula he's using for random numbers:
 </p>
 
 <pre>
@@ -67,6 +55,18 @@ def gen_password():
 </p>
 
 <div class='level2 rounded'>
+  <% if message %>
+    <div class="alert alert-info" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <% if error %>
+    <div class="alert alert-warning" role="alert">
+      <%= error %>
+    </div>
+  <% end %>
+
   <form method='GET'>
     <input type='hidden' name='action' value='reset' />
     <p>Reset your password then Dr. Z's</p>
@@ -86,7 +86,7 @@ def gen_password():
   </form>
 </div>
 
-<div class='answer bg-light rounded'>
+<div class='answer'>
   <p>Which account name did you log in as?</p>
 
   <%= erb :answer %>

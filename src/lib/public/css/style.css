@@ -53,8 +53,12 @@ footer {
 }
 
 .answer {
+  background-color: #006000;
+  color: white;
+  text-align: center;
   padding: 5px;
   margin: 5px;
+  border-radius: 4px;
 }
 
 .level1 {
@@ -69,7 +73,6 @@ footer {
 }
 
 .level2 {
-  #background-image: url("/images/parchment.jpg");
   background-color: #c59d5d;
   color: black;
   padding: 20px;
@@ -77,6 +80,31 @@ footer {
   text-align: center;
   font-weight: bold;
   font-size: 1.1em;
+}
+
+.level3 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level3 .name {
+  width: 50%;
+}
+
+.level3 textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
 }
 
 pre {

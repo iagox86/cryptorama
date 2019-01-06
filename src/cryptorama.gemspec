@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'hexhelper',  '~> 0.0.2'
   spec.add_dependency 'singlogger', '~> 0.0.0'
   spec.add_dependency 'optimist', '~> 3.0.0'
+  spec.add_dependency 'salsa20', '~> 0.1.3'
 end

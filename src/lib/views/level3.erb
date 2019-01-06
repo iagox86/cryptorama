@@ -1,1 +1,61 @@
-This is level 3!
+<% if completed %>
+  <div class="alert alert-success" role="alert">
+    This level is already completed!
+  </div>
+<% end %>
+
+
+<p>
+  Bad news! The account you got doesn't have access to Dr. Z's evil plan!
+</p>
+
+<p>
+  But we're in luck. According to the gizmomenometer, the site is encrypting
+  the privilege level right in a token without even signing it!
+</p>
+
+
+<div class='level3 rounded'>
+  <% if message %>
+    <div class="alert alert-info" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <% if error %>
+    <div class="alert alert-warning" role="alert">
+      <%= error %>
+    </div>
+  <% end %>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='encrypt_ecb' />
+    <p>First name <input type='text' class='name' name='first_name', value='<%= first_name %>' /></p>
+    <p>Last name  <input type='text' class='name' name='last_name',  value='<%= last_name %>' /></p>
+    <p>Admin? <input type='text' class='name' disabled='1' value='0' /></p>
+    <p><input type='submit' value='Encrypt cookie!' /></p>
+  </form>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt_ecb' />
+    <p>AES-256-ECB (block cipher) <textarea name='token' id='ecb_token'><%= ecb_token %></textarea></p>
+    <p>
+      <button type='button' onclick='document.getElementById("ecb_token").value = document.getElementById("ecb_token").value.replace(/ /g, "").match(/.{1,32}/g).join(" "); return 1;'>Split into blocks</button>
+      <input type='submit' value='Check cookie!' />
+    </p>
+  </form>
+
+  <hr />
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt_salsa20' />
+    <p>Salsa20 (stream cipher) <textarea name='token' id='salsa20_token'><%= salsa20_token %></textarea></p>
+    <p><input type='submit' value='Check cookie!' /></p>
+  </form>
+</div>
+
+<div class='answer'>
+  <p>What is the Dr. Z's secret project name?</p>
+
+  <%= erb :answer %>
+</div>
