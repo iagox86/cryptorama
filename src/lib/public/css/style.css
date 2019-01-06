@@ -46,3 +46,24 @@ footer {
   margin: 0 auto;
   text-align: center;
 }
+
+.completed {
+  color: green;
+  font-weight: bold;
+}
+
+.answer {
+  padding: 5px;
+  margin: 5px;
+}
+
+.challenge {
+  background-image: url("/images/parchment.jpg");
+  background-color: #f5dd9d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}

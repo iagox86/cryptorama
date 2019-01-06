@@ -3,6 +3,45 @@
     This level is already completed!
   </div>
 <% end %>
-This is level 1!
 
-<%= erb :answer %>
+<p>
+  Good news everyone! The package you were supposed to deliver is missing!
+</p>
+
+<p>
+  Why's that good news? Isn't it obvious? It means we can finally put your
+  hacking skills to good use!
+</p>
+
+<p>
+  Fortunately, the person who stole our package dropped a piece of paper.
+  Unfortunately, it is in some kind of code!
+</p>
+
+<p>
+  Can you use your new-found cryptanalysis skills to decrypt it?
+</p>
+
+<div class='answer bg-light rounded'>
+  <p>Who stole the package? (please enter the name exactly as shown on the note)</p>
+
+  <%= erb :answer %>
+</div>
+
+<div class='challenge rounded'>
+  <p><%=            "Evil plan notes..."                                          %></p>
+  <p><%= hex(       "First, I steal the very special package from the Professor") %></p>
+  <p><%= binary(    "Next, I ransom it back")                                     %></p>
+  <p><%= urlenc(    "If he won't pay, I will action it off, I will!")             %></p>
+  <p><%= ascii(     "But what if it's worthless, you say?")                       %></p>
+  <p><%= base64(    "Nobody will even know, they won't!")                         %></p>
+  <p><%= hex(       "I will finally have money, or my name isn't...")             %></p>
+  <p><%= base32(     "...oh ha ha ha, almost revealed my name!")                  %></p>
+
+
+  <hr />
+  <hr />
+  <hr />
+
+  <p><%= everything("From the desk of Dr.Z") %></p>
+</div>
