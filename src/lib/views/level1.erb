@@ -22,13 +22,7 @@
   Can you use your new-found cryptanalysis skills to decrypt it?
 </p>
 
-<div class='answer bg-light rounded'>
-  <p>Who stole the package? (please enter the name exactly as shown on the note)</p>
-
-  <%= erb :answer %>
-</div>
-
-<div class='challenge rounded'>
+<div class='level1 rounded'>
   <p><%=            "Evil plan notes..."                                          %></p>
   <p><%= hex(       "First, I steal the very special package from the Professor") %></p>
   <p><%= binary(    "Next, I ransom it back")                                     %></p>
@@ -44,4 +38,10 @@
   <hr />
 
   <p><%= everything("From the desk of Dr.Z") %></p>
+</div>
+
+<div class='answer bg-light rounded'>
+  <p>Who stole the package? (please enter the name exactly as shown on the note)</p>
+
+  <%= erb :answer %>
 </div>

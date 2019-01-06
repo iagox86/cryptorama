@@ -38,16 +38,17 @@ module Cryptorama
       return 404, "Unknown path (make sure you're using get/post properly!)"
     end
 
+    # TODO: Only open the first one
     before do
       session[:level1] = { completed: false, show: true,  open: true  }.merge(session[:level1] || {})
-      session[:level2] = { completed: false, show: true,  open: false }.merge(session[:level2] || {})
-      session[:level3] = { completed: false, show: false, open: false }.merge(session[:level3] || {})
-      session[:level4] = { completed: false, show: false, open: false }.merge(session[:level4] || {})
-      session[:level5] = { completed: false, show: false, open: false }.merge(session[:level5] || {})
-      session[:level6] = { completed: false, show: false, open: false }.merge(session[:level6] || {})
-      session[:level7] = { completed: false, show: false, open: false }.merge(session[:level7] || {})
-      session[:level8] = { completed: false, show: false, open: false }.merge(session[:level8] || {})
-      session[:level9] = { completed: false, show: false, open: false }.merge(session[:level9] || {})
+      session[:level2] = { completed: false, show: true,  open: true }.merge(session[:level2] || {})
+      session[:level3] = { completed: false, show: false, open: true }.merge(session[:level3] || {})
+      session[:level4] = { completed: false, show: false, open: true }.merge(session[:level4] || {})
+      session[:level5] = { completed: false, show: false, open: true }.merge(session[:level5] || {})
+      session[:level6] = { completed: false, show: false, open: true }.merge(session[:level6] || {})
+      session[:level7] = { completed: false, show: false, open: true }.merge(session[:level7] || {})
+      session[:level8] = { completed: false, show: false, open: true }.merge(session[:level8] || {})
+      session[:level9] = { completed: false, show: false, open: true }.merge(session[:level9] || {})
     end
 
     get '/' do
