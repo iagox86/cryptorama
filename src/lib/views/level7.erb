@@ -1,0 +1,21 @@
+<% if completed %>
+  <div class="alert alert-success" role="alert">
+    This level is already completed!
+  </div>
+<% end %>
+
+
+<p>
+  TODO
+</p>
+
+<div class='level7 rounded'>
+  <%= erb(:message_box, :locals => { message: message, error: error }) %>
+
+</div>
+
+<div class='answer'>
+  <p>What is TODO</p>
+
+  <%= erb :answer %>
+</div>

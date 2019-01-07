@@ -17,6 +17,9 @@ require 'level1'
 require 'level2'
 require 'level3'
 require 'level4'
+require 'level5'
+require 'level6'
+require 'level7'
 
 module Cryptorama
   class Server < Sinatra::Base
@@ -48,8 +51,6 @@ module Cryptorama
       session[:level5] = { completed: false, show: true, open: true }.merge(session[:level5] || {})
       session[:level6] = { completed: false, show: true, open: true }.merge(session[:level6] || {})
       session[:level7] = { completed: false, show: true, open: true }.merge(session[:level7] || {})
-      session[:level8] = { completed: false, show: true, open: true }.merge(session[:level8] || {})
-      session[:level9] = { completed: false, show: true, open: true }.merge(session[:level9] || {})
     end
 
     get '/' do
@@ -60,6 +61,9 @@ module Cryptorama
           LEVEL2.merge(session[:level2] || {}),
           LEVEL3.merge(session[:level3] || {}),
           LEVEL4.merge(session[:level4] || {}),
+          LEVEL5.merge(session[:level5] || {}),
+          LEVEL6.merge(session[:level6] || {}),
+          LEVEL7.merge(session[:level7] || {}),
         ]
       }
     end
