@@ -1,16 +1,9 @@
-require 'bcrypt'
-require 'digest'
-require 'openssl'
-require 'salsa20'
-require 'smbhash'
-require 'argon2'
-
 module Cryptorama
   class Server < Sinatra::Base
     LEVEL6 = {
       name:   "Level 6: TODO",
       url:    "/level6",
-      answer: 'lobster',
+      answer: 'TODO',
     }
 
     get '/level6' do

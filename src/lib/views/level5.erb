@@ -6,12 +6,30 @@
 
 
 <p>
-  TODO
+  Great job! Now that we have Dr. Z's password, we can finally read his plan!
+</p>
+
+<p>
+  ...or we would, if it wasn't encrypted! The entire plan can only be read
+  or written using state of the art AES-256 encryption!
+</p>
+
+<p>
+  Can you decrypt it?
 </p>
 
 <div class='level5 rounded'>
   <%= erb(:message_box, :locals => { message: message, error: error }) %>
 
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt' />
+    <p>Encrypted data <textarea name='encrypted' id='encrypted'><%= encrypted %></textarea></p>
+    <p><input type='submit' value='Save' /></p>
+  </form>
+  <form method='GET'>
+    <input type='hidden' name='action' value='reset' />
+    <p><input type='submit' value='Reset' /></p>
+  </form>
 </div>
 
 <div class='answer'>
