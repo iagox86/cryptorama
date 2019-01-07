@@ -14,25 +14,24 @@
   the privilege level right in a token without even signing it!
 </p>
 
+<p>
+  We found both AES-256-ECB and Salsa20 in use. Since neither is signed, both
+  are equally vulnerable!
+</p>
+
+<p>
+  Choose whichever one you'd like to attack! If you have time, feel free to do
+  both!
+</p>
 
 <div class='level3 rounded'>
-  <% if message %>
-    <div class="alert alert-info" role="alert">
-      <%= message %>
-    </div>
-  <% end %>
-
-  <% if error %>
-    <div class="alert alert-warning" role="alert">
-      <%= error %>
-    </div>
-  <% end %>
+  <%= erb(:message_box, :locals => { message: message, error: error }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='encrypt_ecb' />
     <p>First name <input type='text' class='name' name='first_name', value='<%= first_name %>' /></p>
     <p>Last name  <input type='text' class='name' name='last_name',  value='<%= last_name %>' /></p>
-    <p>Admin? <input type='text' class='name' disabled='1' value='0' /></p>
+    <p>is_admin? <input type='text' class='name' disabled='1' value='0' /></p>
     <p><input type='submit' value='Encrypt cookie!' /></p>
   </form>
 
@@ -55,7 +54,7 @@
 </div>
 
 <div class='answer'>
-  <p>What is the Dr. Z's secret project name?</p>
+  <p>What is Dr. Z's secret project name?</p>
 
   <%= erb :answer %>
 </div>

@@ -29,4 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'singlogger', '~> 0.0.0'
   spec.add_dependency 'optimist', '~> 3.0.0'
   spec.add_dependency 'salsa20', '~> 0.1.3'
+  spec.add_dependency 'smbhash', '~> 1.0.2'
+  spec.add_dependency 'bcrypt', '~> 3.1.12'
+  spec.add_dependency 'argon2', '~> 2.0.0'
 end

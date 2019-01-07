@@ -107,10 +107,83 @@ footer {
   background-color: #f8f8f8;
 }
 
+.level4 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level4 .code {
+  text-align: left;
+  padding: 20px;
+}
+
+.level5 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level6 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level7 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level8 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.level9 {
+  background-color: #c59d5d;
+  color: black;
+  padding: 20px;
+  margin: 20px 100px 20px 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 pre {
   white-space: pre-wrap;
   font-family: monospace;
-  color: #839496;
+  color: white;
+  background-color: #002b36;
+  padding: 5px;
+}
+
+.code {
+  white-space: pre-wrap;
+  font-family: monospace;
+  color: white;
   background-color: #002b36;
   padding: 5px;
 }

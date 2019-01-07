@@ -16,6 +16,7 @@ require 'singlogger'
 require 'level1'
 require 'level2'
 require 'level3'
+require 'level4'
 
 module Cryptorama
   class Server < Sinatra::Base
@@ -42,13 +43,13 @@ module Cryptorama
     before do
       session[:level1] = { completed: false, show: true,  open: true  }.merge(session[:level1] || {})
       session[:level2] = { completed: false, show: true,  open: true }.merge(session[:level2] || {})
-      session[:level3] = { completed: false, show: false, open: true }.merge(session[:level3] || {})
-      session[:level4] = { completed: false, show: false, open: true }.merge(session[:level4] || {})
-      session[:level5] = { completed: false, show: false, open: true }.merge(session[:level5] || {})
-      session[:level6] = { completed: false, show: false, open: true }.merge(session[:level6] || {})
-      session[:level7] = { completed: false, show: false, open: true }.merge(session[:level7] || {})
-      session[:level8] = { completed: false, show: false, open: true }.merge(session[:level8] || {})
-      session[:level9] = { completed: false, show: false, open: true }.merge(session[:level9] || {})
+      session[:level3] = { completed: false, show: true, open: true }.merge(session[:level3] || {})
+      session[:level4] = { completed: false, show: true, open: true }.merge(session[:level4] || {})
+      session[:level5] = { completed: false, show: true, open: true }.merge(session[:level5] || {})
+      session[:level6] = { completed: false, show: true, open: true }.merge(session[:level6] || {})
+      session[:level7] = { completed: false, show: true, open: true }.merge(session[:level7] || {})
+      session[:level8] = { completed: false, show: true, open: true }.merge(session[:level8] || {})
+      session[:level9] = { completed: false, show: true, open: true }.merge(session[:level9] || {})
     end
 
     get '/' do
@@ -58,6 +59,7 @@ module Cryptorama
           LEVEL1.merge(session[:level1] || {}),
           LEVEL2.merge(session[:level2] || {}),
           LEVEL3.merge(session[:level3] || {}),
+          LEVEL4.merge(session[:level4] || {}),
         ]
       }
     end

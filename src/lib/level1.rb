@@ -10,6 +10,10 @@ def hex(text)
   return text.unpack("H*")[0].gsub(/(..)/, '\1 ')
 end
 
+def hex2(text)
+  return text.unpack("H*")[0]
+end
+
 def binary(text)
   return text.unpack('B*')[0].gsub(/(........)/, '\1 ')
 end
@@ -27,7 +31,7 @@ def base32(text)
 end
 
 def everything(text)
-  return hex(ascii(urlenc(base32(base64(text)))))
+  return base64(hex2(hex(ascii(urlenc(base32(text))))))
 end
 
 module Cryptorama
