@@ -18,17 +18,26 @@
   Can you decrypt it?
 </p>
 
+<p>
+  Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> might help, or the blog posts <a href='https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth'>here</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>here</a>.
+</p>
+
+<p>
+  Dr. Z, the fool, gives overly verbose output and embeds the IV! Use that to
+  your advantage!!
+</p>
+
 <div class='level5 rounded'>
   <%= erb(:message_box, :locals => { message: message, error: error }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt' />
+    <input type='hidden' name='token' value='<%= token %>' />
     <p>Encrypted data <textarea name='encrypted' id='encrypted'><%= encrypted %></textarea></p>
     <p><input type='submit' value='Save' /></p>
   </form>
   <form method='GET'>
-    <input type='hidden' name='action' value='reset' />
-    <p><input type='submit' value='Reset' /></p>
+    <p><input type='submit' value='Reset (changes the key!)' /></p>
   </form>
 </div>
 

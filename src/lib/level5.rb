@@ -3,42 +3,83 @@ require 'json'
 TEXT = {
   'signature'     => 'aabbccdd',
   'signature_alg' => 'sha256',
-  'data'          => 'dGhpcyBpcyBhIHRlc3Q='
+  'data'          => 'dGhpcyBpcyBhIHRlc3Q=',
+  'test'          => 'test',
 }
 
-def reset(session)
-  alg = "AES-256-CBC"
-  data = TEXT.to_json()
+ALG = "AES-256-CBC"
 
-  session[:level5][:key] = OpenSSL::Cipher::Cipher.new(alg).random_key
-  session[:level5][:iv]  = OpenSSL::Cipher::Cipher.new(alg).random_iv
-
-  aes = OpenSSL::Cipher::Cipher.new(alg)
-  aes.encrypt
-  aes.key = session[:level5][:key]
-  aes.iv  = session[:level5][:iv]
-
-  # Now we go ahead and encrypt our plain text.
-  session[:level5][:encrypted] = (aes.update(data) + aes.final).unpack("H*").pop
+class PaddingException < StandardError
 end
 
-def decrypt(session, data)
-  alg = "AES-256-CBC"
+def tohex(s)
+  return s.unpack("H*").pop
+end
 
-  aes = OpenSSL::Cipher::Cipher.new(alg)
-  aes.decrypt
-  aes.key = session[:level5][:key]
-  aes.iv  = session[:level5][:iv]
-  aes.padding = 0
+def fromhex(s)
+  return [s].pack("H*")
+end
+
+# Note: I'm using a token here that I'm including in the URL, for the purposes
+# of not requiring a session (and therefore making this much easier to solve).
+def reset()
+  token = (1..8).map{rand(255).chr}.join
+  iv    = (1..16).map{rand(255).chr}.join
+
+  c = OpenSSL::Cipher::Cipher.new(ALG)
+  c.encrypt
+  c.key = token * 4
+  c.iv  = iv
+
+  return tohex(token), tohex(iv + c.update(TEXT.to_json()) + c.final)
+end
+
+def decrypt(token, data)
+  c = OpenSSL::Cipher::Cipher.new(ALG)
+  c.decrypt
+  c.key = fromhex(token) * 4
+
+  iv, data = fromhex(data).unpack("a16a*")
+  c.iv = iv
+
+  # Disable padding validation so we can do it manually
+  c.padding = 0
 
   # Now we go ahead and encrypt our plain text.
-  return aes.update([data].pack("H*")) + aes.final
+  result = c.update(data) + c.final
+
+  if(result.length == 0)
+    raise(PaddingException, "At least one block is required!")
+  end
+
+  # Manually check the padding (so we can give a better error)
+  last_byte = result[result.length - 1].ord
+
+  # Make sure it's no more than a block
+  if(last_byte > 0x10 || last_byte <= 0)
+    raise(PaddingException, "Last byte of padding is illegal: 0x%02x!" % last_byte)
+  end
+
+  # Make sure it's not longer than the string
+  if(last_byte > result.length)
+    raise(PaddingException, "Padding is unexpectedly large: %d bytes!" % last_byte)
+  end
+
+  # Make sure the last n bytes are all n
+  expected_padding = last_byte.chr * last_byte
+  if(!result.end_with?(expected_padding))
+    raise(PaddingException, "Padding is invalid (string doesn't end with the right sequence of bytes)!")
+  end
+
+  # Remove the padding
+  return result.gsub(/#{expected_padding}$/, '')
 end
+
 
 module Cryptorama
   class Server < Sinatra::Base
     LEVEL5 = {
-      name:   "Level 5: TODO",
+      name:   "Level 5: Padding Oracle",
       url:    "/level5",
       answer: 'TODO',
     }
@@ -47,28 +88,31 @@ module Cryptorama
       message = nil
       error = nil
 
-      if(session[:level5][:encrypted].nil?)
-        reset(session)
-      end
+      action = params[:action]
+      token = params[:token]
+      encrypted = params[:encrypted]
 
-      if(params[:action] == 'reset')
-        reset(session)
-      elsif(params[:action] == 'decrypt')
+      if(token.nil?)
+        message = "New encryption key generated!"
+        token, encrypted = reset()
+      elsif(action == 'decrypt')
+        # TODO: Don't display this
         begin
-          # TODO: Don't display this
-          message = decrypt(session, params[:encrypted])
-          message = message + " :: " + message.unpack("H*").to_s
-        rescue OpenSSL::Cipher::CipherError => e
-          error = "Could not decrypt: " + e.to_s
+          message = decrypt(token, encrypted)
+          message = "Data successfully decrypted and stored!"
+        rescue PaddingException => e
+          error = "ERROR: Data decryption failed: #{e}"
         end
       end
+
 
       erb :level5, :locals => {
         :completed => session[:level5][:completed],
         :message   => message,
         :error     => error,
 
-        :encrypted => session[:level5][:encrypted]
+        :encrypted => ERB::Util.html_escape(encrypted),
+        :token     => ERB::Util.html_escape(token),
       }
     end
 
