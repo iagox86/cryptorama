@@ -1,0 +1,42 @@
+<p>
+  Great job! Now that we have Dr. Z's password, we can finally read his plan!
+</p>
+
+<p>
+  ...or we would, if it wasn't encrypted! The entire plan can only be read
+  or written using state of the art AES-256 encryption!
+</p>
+
+<p>
+  Can you decrypt it?
+</p>
+
+<p>
+  Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> might help, or the blog posts <a href='https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth'>here</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>here</a>.
+</p>
+
+<p>
+  Dr. Z, the fool, gives overly verbose output and embeds the IV! Use that to
+  your advantage!!
+</p>
+
+<div class='level level5 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt' />
+    <input type='hidden' name='token' value='<%= token %>' />
+    <p>Encrypted data <textarea name='encrypted' id='encrypted'><%= encrypted %></textarea></p>
+    <p><input type='submit' value='Save' /></p>
+  </form>
+  <form method='GET'>
+    <input type='hidden' name='action' value='reset' />
+    <p><input type='submit' value='Reset (changes the key for levels 5, 6, and 7!)' /></p>
+  </form>
+</div>
+
+<div class='answer'>
+  <p>What is his secret plan name?</p>
+
+  <%= erb :answer %>
+</div>
