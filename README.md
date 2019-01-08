@@ -6,22 +6,19 @@ I created.
 
 # Running
 
-The easiest way to run this is to use docker. Then just run...
+The easiest way to run this is to use docker. With docker installed and running,
+run...
 
 
 ```
-make install
-make run
+make && make run
 ```
 
 ...as any user in the local `docker` group.
 
 # Challenges
 
-See the [src/](src/) folder for the application source code.
+See the [src/](src/) folder for the application source code and
+[solution/](solution/] for solutions.
 
 TODO: Outline the challenges here
-
-# Solutions
-
-See the [solutions/](solutions/) folder for solutions and walkthroughs.
