@@ -9,6 +9,7 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'singlogger'
+require 'securerandom'
 
 require 'level1'
 require 'level2'
@@ -18,14 +19,14 @@ require 'level5'
 require 'level6'
 require 'level7'
 
+LOGGER = ::SingLogger.instance()
+
 module Cryptorama
   class Server < Sinatra::Base
     enable :sessions
 
     def initialize(*args)
       super(*args)
-
-      @logger = ::SingLogger.instance()
     end
 
     configure do
@@ -33,6 +34,11 @@ module Cryptorama
         set :port, PARAMS[:port]
         set :bind, PARAMS[:host]
       end
+
+      set :session_secret, ENV.fetch('SESSION_SECRET') {
+				LOGGER.warn("No SESSION_SECRET found in ENV, using a random one")
+				SecureRandom.hex(64)
+			}
     end
 
     not_found do
