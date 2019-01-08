@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/lib'))
 
-
+require 'sinatra'
 require 'optimist'
 require 'singlogger'
 
@@ -23,7 +23,7 @@ OPTS = Optimist::options do
     :port,
     "The port to listen on",
     :type => :integer,
-    :default => ENV['PORT'] ? ENV['PORT'].to_i : 4567
+    :default => ENV['PORT'] ? ENV['PORT'].to_i : 1234
   )
 end
 
@@ -39,4 +39,4 @@ end
 
 # The main application that will be run
 require 'app'
-::Cryptorama::Server.run!()
+run ::Cryptorama::Server.run!()

@@ -136,8 +136,6 @@ def scheme_verify(token, scheme)
 
   script = Base64.decode64(script)
 
-  puts("ALG: ")
-  puts(scheme.to_json)
   if(scheme['signature_alg'] != "sha256")
     raise(ArgumentError, "Sorry, the algorithm can't be changed, but good thought!")
   end
@@ -159,7 +157,6 @@ end
 def scheme_decrypt_verify(token, data)
   decrypted = scheme_decrypt(token, data)
   decrypted = decrypted.force_encoding('ASCII-8BIT')
-  puts(decrypted)
   decrypted = JSON.parse(decrypted)
 
   return scheme_verify(token, decrypted)

@@ -24,12 +24,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '~> 0.14.1'
   spec.add_development_dependency 'test-unit', '~> 3.2.8'
 
+  spec.add_dependency 'argon2', '~> 2.0.0'
   spec.add_dependency 'base32',     '~> 0.3.2'
+  spec.add_dependency 'bcrypt', '~> 3.1.12'
   spec.add_dependency 'hexhelper',  '~> 0.0.2'
-  spec.add_dependency 'singlogger', '~> 0.0.0'
   spec.add_dependency 'optimist', '~> 3.0.0'
   spec.add_dependency 'salsa20', '~> 0.1.3'
+  spec.add_dependency 'sinatra', '~> 2.0.5'
+  spec.add_dependency 'singlogger', '~> 0.0.0'
   spec.add_dependency 'smbhash', '~> 1.0.2'
-  spec.add_dependency 'bcrypt', '~> 3.1.12'
-  spec.add_dependency 'argon2', '~> 2.0.0'
+  spec.add_dependency 'thin', '~> 1.7.2'
 end

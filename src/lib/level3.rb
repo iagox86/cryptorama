@@ -103,7 +103,6 @@ module Cryptorama
 
       first_name = params[:first_name] || 'Dr'
       last_name  = params[:last_name]  || 'Z'
-      puts(first_name)
 
       cookie = "first_name=#{first_name},last_name=#{last_name},is_admin=0"
 
