@@ -1,1 +1,77 @@
-This is level 2!
+<p>
+  Dr. Z you say? That's bad news, really bad news indeed. Oh my...
+</p>
+
+<p>
+  Well, good news everyone! You're going to get to try your brand new, highly
+  experimental and dangerous PRNG-busting skills by breaking into his Web site!
+</p>
+
+<p>
+  Why break in? Do you have a BETTER idea?
+</p>
+
+<p>
+  So to break in, my Web site assess-o-meter has determined that Dr. Z's
+  password reset has only 24 bits of random state. Poor guy, can't even afford
+  a proper random generator. Very sad...
+</p>
+
+<p>
+  The Gizmomenometer has calculated the formula he's using for random numbers:
+</p>
+
+<pre class='code'>
+# Generates a random number between 0 and (max - 1)
+def rand(max):
+  global seed
+  seed = ((seed * 214013) + 2531011) % 0x00FFFFFF
+  return seed % max
+</pre>
+
+<p>
+  And the formula for generating a new 24-character password:
+</p>
+
+<pre class='code'>
+def gen_password():
+  p = ''
+  for i in range(0, 12):
+    p += '%02x' % rand(256)
+
+  return p
+</pre>
+
+<p>
+  I rigged up a button that will reset a password we can see, then reset Dr. Z's
+  immediately after. That means if you can figure out the seed for your own
+  password, you can figure out Dr. Z's!
+</p>
+
+<div class='level level2 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='reset' />
+    <p>Reset your password then Dr. Z's</p>
+    <p><input type='submit' value='Reset!' /></p>
+  </form>
+
+  <hr />
+  <hr />
+  <hr />
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='login' />
+    <p>Or login maybe?</p>
+    <p>Password: <input type='text' name='password' /></p>
+    <p><input type='submit' value='Log in!' /></p>
+    Please log in!
+  </form>
+</div>
+
+<div class='answer'>
+  <p>Which account name did you log in as?</p>
+
+  <%= erb :answer %>
+</div>

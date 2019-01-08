@@ -1,1 +1,48 @@
-This is level 3!
+<p>
+  Bad news! The account you got doesn't have access to Dr. Z's evil plan!
+</p>
+
+<p>
+  But we're in luck. According to the gizmomenometer, the site is encrypting
+  the privilege level right in a token without even signing it!
+</p>
+
+<p>
+  We found both AES-256-ECB and Salsa20 in use. Since neither is signed, both
+  are equally vulnerable! Try one, if you have time, try both!
+</p>
+
+<div class='level level3 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='encrypt_ecb' />
+    <p>First name <input type='text' class='name' name='first_name', value='<%= first_name %>' /></p>
+    <p>Last name  <input type='text' class='name' name='last_name',  value='<%= last_name %>' /></p>
+    <p>is_admin? <input type='text' class='name' disabled='1' value='0' /></p>
+    <p><input type='submit' value='Submit encrypted cookie!' /></p>
+  </form>
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt_ecb' />
+    <p>AES-256-ECB (block cipher) <textarea name='token' id='ecb_token'><%= ecb_token %></textarea></p>
+    <p>
+      <button type='button' onclick='document.getElementById("ecb_token").value = document.getElementById("ecb_token").value.replace(/ /g, "").match(/.{1,32}/g).join(" "); return 1;'>Split into blocks</button>
+      <input type='submit' value='Check cookie!' />
+    </p>
+  </form>
+
+  <hr />
+
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt_salsa20' />
+    <p>Salsa20 (stream cipher) <textarea name='token' id='salsa20_token'><%= salsa20_token %></textarea></p>
+    <p><input type='submit' value='Submit encrypted cookie!' /></p>
+  </form>
+</div>
+
+<div class='answer'>
+  <p>What is Dr. Z's secret site called?</p>
+
+  <%= erb :answer %>
+</div>

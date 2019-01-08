@@ -4,12 +4,29 @@
   </div>
 </header>
 
-<ul>
-<% levels.each do |level| %>
-  <% if level[:open] %>
-    <li><a href='<%= level[:url] %>'><%= level[:name] %></a></li>
-  <% elsif level[:show] %>
-    <li><%= level[:name] %> (not open yet!)</li>
-  <% end %>
+<% if ((levels.select { |l| !l[:completed] }).length == 0) %>
+  <div class="alert alert-info" role="alert">
+    Congratulations, you've saved the company! Now, get back to work before you
+    hurt the company!!
+  </div>
+<% else %>
+  <p>Come quick everyone! I need you in the pandemonium room!</p>
+
+  <p>...</p>
+
+  <p>Are you all here? Great! Let's get started!</p>
 <% end %>
+
+<p>Pick your level from below</p>
+
+<% puts(LEVEL1.merge(session[:level1] || {})) %>
+<ul>
+  <% levels.each do |level| %>
+    <li>
+      <a href='<%= level[:url] %>'><%= level[:name] %></a>
+      <% if level[:completed] %>
+        <span class="completed">&check;</span>
+      <% end %>
+    </li>
+  <% end %>
 </ul>

@@ -1,0 +1,80 @@
+<p>
+  Congratulations on getting admin access to Dr. Z's application! But I have
+  some bad news: the information we need isn't there! We (me and the trusty
+  Gizmometer) are pretty sure it's on another application. We need you to
+  crack Dr. Z's real password this time!
+</p>
+
+<p>
+  We retrieved the full password database. It has more password hash formats
+  than any database we've ever seen!
+</p>
+
+<p>
+  dr.z has the password that we need, but can you break all of them? Hint: All
+  passwords on this site are required to be lowercase
+  <a href='http://downloads.skullsecurity.org/passwords/english.txt.bz2'>English words</a>.
+  (No, I don't know what he was thinking...)
+</p>
+
+<p>
+  Hint: John the Ripper with the "Jumbo" patch should be able to crack each
+  of these formats, but you may need the `--format=` string on some!
+</p>
+
+<div class='level level4 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
+
+  <p>Unsalted passwords</p>
+
+  <pre class='code'>
+# Windows LANMAN - unsalted 7-bit DES
+john:<%= hash_lanman('lawlessandroid') %>
+david:<%= hash_lanman('unknownjanitor') %>
+
+# Windows NT (NTLM) - unsalted md4
+phil:<%= hash_ntlm('accountant') %>
+dr.z:<%= hash_ntlm(LEVEL4[:answer]) %>
+  </pre>
+
+  <p>Salted passwords</p>
+
+  <p>Notice that when you refresh the page, these change?</p>
+
+  <pre class='code'>
+# Classic UNIX DES (salted 8-bit DES)
+katey:<%= hash_crypt('seagull') %>
+maurice:<%= hash_crypt('lizard') %>
+
+# Mediawiki - salted MD5
+walter:<%= hash_mediawiki('rude') %>
+lawrence:<%= hash_mediawiki('mean') %>
+igner:<%= hash_mediawiki('slow') %>
+ma:<%= hash_mediawiki('evil') %>
+  </pre>
+
+  <p>Password-optimized hashes</p>
+
+  <p>
+    Even though these are similarly simple password, how many have you been
+    able to crack?
+  </p>
+
+  <pre class='code'>
+# BCrypt
+boxie:<%= hash_bcrypt('beep', 6) %>
+calcutron:<%= hash_bcrypt('famous', 8) %>
+don:<%= hash_bcrypt('organized', 10) %>
+clips:<%= hash_bcrypt('clips', 12) %>
+
+# Argon2 - may not work in John the Ripper
+professor:<%= hash_argon2('ancient') %>
+phillip:<%= hash_argon2('orange') %>
+  </pre>
+</div>
+
+<div class='answer'>
+  <p>What is Dr. Z's password?</p>
+
+  <%= erb :answer %>
+</div>
