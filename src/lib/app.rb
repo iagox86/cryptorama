@@ -6,11 +6,8 @@
 # This implements a sinatra-based server.
 ##
 
-#require 'json'
-#require 'securerandom'
 require 'sinatra'
 require 'sinatra/base'
-
 require 'singlogger'
 
 require 'level1'
