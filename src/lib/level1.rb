@@ -18,20 +18,16 @@ def binary(text)
   return text.unpack('B*')[0].gsub(/(........)/, '\1 ')
 end
 
-def urlenc(text)
-  return text
-end
-
 def ascii(text)
   return text.bytes().join(" ")
 end
 
 def base32(text)
-  return Base32.encode(text).downcase
+  return Base32.encode(text)
 end
 
 def everything(text)
-  return base64(hex2(hex(ascii(urlenc(base32(text))))))
+  return base64(hex(ascii(hex2(base32(text)))))
 end
 
 module Cryptorama
