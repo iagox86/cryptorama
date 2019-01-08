@@ -143,7 +143,6 @@ footer {
   background-color: #f8f8f8;
 }
 
-
 .level6 {
   background-color: #c59d5d;
   color: black;
@@ -154,6 +153,17 @@ footer {
   font-size: 1.1em;
 }
 
+.level6 textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+
 .level7 {
   background-color: #c59d5d;
   color: black;
@@ -162,6 +172,17 @@ footer {
   text-align: center;
   font-weight: bold;
   font-size: 1.1em;
+}
+
+.level7 textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
 }
 
 .level8 {

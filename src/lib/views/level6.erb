@@ -4,18 +4,50 @@
   </div>
 <% end %>
 
+<p>
+  Wow, that's quite the intricate plan!
+</p>
 
 <p>
-  TODO
+  If there's one thing I know about Dr. Z, it's that he isn't very smart. If you
+  could find a way to change his plan, he'd likely follow the new one to the
+  letter!
+</p>
+
+<p>
+  Can you modify the plan below, and add one new step so the plan ends with the
+  exact string:
+</p>
+
+<pre>
+  <%= LEVEL6[:codeword] %>
+</pre>
+
+<p>
+  For now, don't worry about encrypting it. We'll get to that!
+</p>
+
+<p>
+  Hint: <a href='https://github.com/iagox86/hash_extender'>This tool</a> will probably help!
 </p>
 
 <div class='level6 rounded'>
   <%= erb(:message_box, :locals => { message: message, error: error }) %>
 
+  <form method='GET'>
+    <input type='hidden' name='action' value='validate' />
+    <input type='hidden' name='token' value='<%= token %>' />
+    <p>Signed object <textarea name='signed' id='signed'><%= signed %></textarea></p>
+    <p><input type='submit' value='Test' /></p>
+  </form>
+  <form method='GET'>
+    <input type='hidden' name='action' value='reset' />
+    <p><input type='submit' value='Reset (changes the key for levels 5, 6, and 7!)' /></p>
+  </form>
 </div>
 
 <div class='answer'>
-  <p>What is TODO</p>
+  <p>What is the code you're given?</p>
 
   <%= erb :answer %>
 </div>

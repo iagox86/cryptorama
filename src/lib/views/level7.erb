@@ -6,12 +6,32 @@
 
 
 <p>
-  TODO
+  Great, it looks like you have some working JSON! Now we just have to
+  re-encrypt it using Dr. Z's key.
+</p>
+
+<p>
+  When you're ready, submit a valid, encrypted, and signed message below, same
+  format as Level 6. In hex, of course.
+</p>
+
+<p>
+  Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>this blog post</a> might help!
 </p>
 
 <div class='level7 rounded'>
   <%= erb(:message_box, :locals => { message: message, error: error }) %>
 
+  <form method='GET'>
+    <input type='hidden' name='action' value='decrypt' />
+    <input type='hidden' name='token' value='<%= token %>' />
+    <p>Encrypted + signed data <textarea name='encrypted' id='encrypted'><%= encrypted %></textarea></p>
+    <p><input type='submit' value='Save' /></p>
+  </form>
+  <form method='GET'>
+    <input type='hidden' name='action' value='reset' />
+    <p><input type='submit' value='Reset (changes the key for levels 5, 6, and 7!)' /></p>
+  </form>
 </div>
 
 <div class='answer'>

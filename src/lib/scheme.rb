@@ -1,3 +1,8 @@
+# encoding: ASCII-8BIT
+
+require 'base64'
+require 'openssl'
+
 ALG = "AES-256-CBC"
 TOKEN_LENGTH = 8
 
@@ -51,19 +56,18 @@ end
 # Note: I'm using a token here that I'm including in the URL, for the purposes
 # of not requiring a session (and therefore making this much easier to solve).
 def scheme_reset(token)
-  script = Base64.encode64([
+  script = [
     "1. Steal the professor's package",
     "2. Hide it somewhere he'll never think to look",
     "3. ???",
     "4. Profit!",
-  ].join("\n"))
+  ].join("\n")
 
   signing_key = _signing_key(token)
   return {
     'codename'      => 'money_making_scheme',
     'signature_alg' => 'sha256',
-    'script'        => script,
-    'test'          => 'test',
+    'script'        => Base64.strict_encode64(script),
     'secret_length' => signing_key.length,
 
     # Just lightly obfuscate the token so we can re-use it for this
@@ -125,8 +129,38 @@ def scheme_decrypt(token, data)
 end
 
 def scheme_verify(token, scheme)
+  script = scheme['script']
+  if(script.nil?)
+    raise(ArgumentError, "Missing 'script' parameter!")
+  end
+
+  script = Base64.decode64(script)
+
+  puts("ALG: ")
+  puts(scheme.to_json)
+  if(scheme['signature_alg'] != "sha256")
+    raise(ArgumentError, "Sorry, the algorithm can't be changed, but good thought!")
+  end
+  if(scheme['secret_length'] != 16)
+    raise(ArgumentError, "Sorry, the secret length can't be changed, but good thought!")
+  end
+
+  # TODO: Verify
+  signing_key = _signing_key(token)
+  signature   = Digest::SHA256.hexdigest(signing_key + script)
+
+  if(signature != scheme['signature'])
+    raise(ArgumentError, "Signature didn't match!")
+  end
+
+  return script
 end
 
 def scheme_decrypt_verify(token, data)
-  return scheme_verify(token, scheme_decrypt(token, data))
+  decrypted = scheme_decrypt(token, data)
+  decrypted = decrypted.force_encoding('ASCII-8BIT')
+  puts(decrypted)
+  decrypted = JSON.parse(decrypted)
+
+  return scheme_verify(token, decrypted)
 end
