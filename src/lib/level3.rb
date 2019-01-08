@@ -56,12 +56,12 @@ module Cryptorama
     LEVEL3 = {
       name:   "Level 3: Change the encrypted text!",
       url:    "/level3",
-      answer: 'project_make_professor_pay',
+      answer: 'evil_plan_why_not',
     }
 
     get '/level3' do
-      message = nil
-      error = nil
+      messages = []
+      errors = []
 
       if(params[:action] == 'decrypt_ecb')
         begin
@@ -75,12 +75,12 @@ module Cryptorama
           end
 
           if(params[:is_admin] == '1')
-            message = "AES-256-ECB: Congratulations, you are an admin! Dr. Z's secret project name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
+            messages << "Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
           else
-            error = "Sorry, you aren't an admin! I decoded this block in AES-256-ECB:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
+            errors << "Sorry, you aren't an admin! I decoded this block in AES-256-ECB:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
           end
         rescue OpenSSL::Cipher::CipherError => e
-          error = "Problem decrypting your ciphertext: #{ERB::Util.html_escape(e.to_s)}"
+          errors << "Problem decrypting your ciphertext: #{ERB::Util.html_escape(e.to_s)}"
         end
       end
 
@@ -95,9 +95,9 @@ module Cryptorama
           end
 
           if(params[:is_admin] == '1')
-            message = "Salsa20: Congratulations, you are an admin! Dr. Z's secret project name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
+            messages << "Salsa20: Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
           else
-            error = "Sorry, you aren't an admin! I decoded this block in Salsa20:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
+            errors << "Sorry, you aren't an admin! I decoded this block in Salsa20:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
           end
       end
 
@@ -109,8 +109,8 @@ module Cryptorama
 
       erb :level3, :locals => {
         :completed => session[:level3][:completed],
-        :message   => message,
-        :error     => error,
+        :messages  => messages,
+        :errors    => errors,
         :first_name => ERB::Util.html_escape(first_name),
         :last_name => ERB::Util.html_escape(last_name),
         :ecb_token => encrypt_aes_ecb(session, cookie),

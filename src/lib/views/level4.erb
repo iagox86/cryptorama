@@ -1,10 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
-
 <p>
   Congratulations on getting admin access to Dr. Z's application! But I have
   some bad news: the information we need isn't there! We (me and the trusty
@@ -29,8 +22,8 @@
   of these formats, but you may need the `--format=` string on some!
 </p>
 
-<div class='level4 rounded'>
-  <%= erb(:message_box, :locals => { message: message, error: error }) %>
+<div class='level level4 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
   <p>Unsalted passwords</p>
 

@@ -42,10 +42,9 @@ module Cryptorama
       return 404, "Unknown path (make sure you're using get/post properly!)"
     end
 
-    # TODO: Only open the first one
     before do
-      session[:level1] = { completed: false, show: true,  open: true  }.merge(session[:level1] || {})
-      session[:level2] = { completed: false, show: true,  open: true }.merge(session[:level2] || {})
+      session[:level1] = { completed: false, show: true, open: true }.merge(session[:level1] || {})
+      session[:level2] = { completed: false, show: true, open: true }.merge(session[:level2] || {})
       session[:level3] = { completed: false, show: true, open: true }.merge(session[:level3] || {})
       session[:level4] = { completed: false, show: true, open: true }.merge(session[:level4] || {})
       session[:level5] = { completed: false, show: true, open: true }.merge(session[:level5] || {})
@@ -54,7 +53,6 @@ module Cryptorama
     end
 
     get '/' do
-      puts session.keys
       erb :index, :locals => {
         :levels => [
           LEVEL1.merge(session[:level1] || {}),

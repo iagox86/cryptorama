@@ -1,21 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
-<% if message %>
-  <div class="alert alert-info" role="alert">
-    <%= message %>
-  </div>
-<% end %>
-
-<% if error %>
-  <div class="alert alert-warning" role="alert">
-    <%= error %>
-  </div>
-<% end %>
-
 <p>
   Good news everyone! The package you were supposed to deliver is missing!
 </p>
@@ -34,7 +16,9 @@
   Can you use your new-found cryptanalysis skills to decrypt it?
 </p>
 
-<div class='level1 rounded'>
+<div class='level level1 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
+
   <p><%=         "Evil plan notes..."                                          %></p>
   <p><%= hex(    "First, I steal the very special package from the Professor") %></p>
   <p><%= binary( "Next, I ransom it back")                                     %></p>

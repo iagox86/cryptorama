@@ -43,13 +43,13 @@ module Cryptorama
     }
 
     get '/level1' do
-      message = nil
-      error = nil
+      messages = []
+      errors = []
 
       erb :level1, :locals => {
         :completed => session[:level1][:completed],
-        :message   => message,
-        :error     => error,
+        :messages  => messages,
+        :errors    => errors,
       }
     end
 

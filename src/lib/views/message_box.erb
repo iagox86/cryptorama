@@ -1,11 +1,23 @@
-<% if message %>
-  <div class="alert alert-info" role="alert">
-    <%= message %>
-  </div>
-<% end %>
+<div class='messagebox'>
+  <% if completed %>
+    <div class="alert alert-success" role="alert">
+      <p>This level is already completed, but you're welcome to keep playing!</p>
+    </div>
+  <% end %>
 
-<% if error %>
-  <div class="alert alert-warning" role="alert">
-    <%= error %>
-  </div>
-<% end %>
+  <% if messages && messages.length > 0 %>
+    <div class="alert alert-info" role="alert">
+      <% messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if errors && errors.length > 0 %>
+    <div class="alert alert-warning" role="alert">
+      <% errors.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

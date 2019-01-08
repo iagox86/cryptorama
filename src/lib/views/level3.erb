@@ -1,10 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
-
 <p>
   Bad news! The account you got doesn't have access to Dr. Z's evil plan!
 </p>
@@ -16,23 +9,18 @@
 
 <p>
   We found both AES-256-ECB and Salsa20 in use. Since neither is signed, both
-  are equally vulnerable!
+  are equally vulnerable! Try one, if you have time, try both!
 </p>
 
-<p>
-  Choose whichever one you'd like to attack! If you have time, feel free to do
-  both!
-</p>
-
-<div class='level3 rounded'>
-  <%= erb(:message_box, :locals => { message: message, error: error }) %>
+<div class='level level3 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='encrypt_ecb' />
     <p>First name <input type='text' class='name' name='first_name', value='<%= first_name %>' /></p>
     <p>Last name  <input type='text' class='name' name='last_name',  value='<%= last_name %>' /></p>
     <p>is_admin? <input type='text' class='name' disabled='1' value='0' /></p>
-    <p><input type='submit' value='Encrypt cookie!' /></p>
+    <p><input type='submit' value='Submit encrypted cookie!' /></p>
   </form>
 
   <form method='GET'>
@@ -49,12 +37,12 @@
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt_salsa20' />
     <p>Salsa20 (stream cipher) <textarea name='token' id='salsa20_token'><%= salsa20_token %></textarea></p>
-    <p><input type='submit' value='Check cookie!' /></p>
+    <p><input type='submit' value='Submit encrypted cookie!' /></p>
   </form>
 </div>
 
 <div class='answer'>
-  <p>What is Dr. Z's secret project name?</p>
+  <p>What is Dr. Z's secret site called?</p>
 
   <%= erb :answer %>
 </div>

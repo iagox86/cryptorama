@@ -1,9 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
 <p>
   Dr. Z you say? That's bad news, really bad news indeed. Oh my...
 </p>
@@ -54,18 +48,8 @@ def gen_password():
   password, you can figure out Dr. Z's!
 </p>
 
-<div class='level2 rounded'>
-  <% if message %>
-    <div class="alert alert-info" role="alert">
-      <%= message %>
-    </div>
-  <% end %>
-
-  <% if error %>
-    <div class="alert alert-warning" role="alert">
-      <%= error %>
-    </div>
-  <% end %>
+<div class='level level2 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='reset' />

@@ -8,19 +8,21 @@ module Cryptorama
     LEVEL5 = {
       name:   "Level 5: Padding Oracle",
       url:    "/level5",
-      answer: 'TODO',
+
+      # Note: This is also embedded in scheme.rb, make sure both are changed
+      answer: 'money_making_scheme',
     }
 
     get '/level5' do
-      message = []
-      error = nil
+      messages = []
+      errors = []
 
       action = params[:action]
 
       # Get the current token
       token, msg = get_token(params, session, params[:action] == 'reset')
       if(!msg.nil?)
-        message << msg
+        messages << msg
       end
 
       # Get the encrypted text from either the parameters or newly generated
@@ -29,16 +31,16 @@ module Cryptorama
       if(action == 'decrypt')
         begin
           scheme_decrypt(token, encrypted)
-          message << "Data successfully decrypted and stored!"
+          messages << "Data successfully decrypted and stored!"
         rescue PaddingException => e
-          error = "ERROR: Data decryption failed: #{e}"
+          errors << "ERROR: Data decryption failed: #{e}"
         end
       end
 
       erb :level5, :locals => {
         :completed => session[:level5][:completed],
-        :message   => message.join("<br />"),
-        :error     => error,
+        :messages  => messages,
+        :errors    => errors,
 
         :encrypted => ERB::Util.html_escape(encrypted),
         :token     => ERB::Util.html_escape(token),

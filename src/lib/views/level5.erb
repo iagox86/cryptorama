@@ -1,10 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
-
 <p>
   Great job! Now that we have Dr. Z's password, we can finally read his plan!
 </p>
@@ -27,8 +20,8 @@
   your advantage!!
 </p>
 
-<div class='level5 rounded'>
-  <%= erb(:message_box, :locals => { message: message, error: error }) %>
+<div class='level level5 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt' />

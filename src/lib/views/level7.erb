@@ -1,10 +1,3 @@
-<% if completed %>
-  <div class="alert alert-success" role="alert">
-    This level is already completed!
-  </div>
-<% end %>
-
-
 <p>
   Great, it looks like you have some working JSON! Now we just have to
   re-encrypt it using Dr. Z's key.
@@ -19,8 +12,8 @@
   Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>this blog post</a> might help!
 </p>
 
-<div class='level7 rounded'>
-  <%= erb(:message_box, :locals => { message: message, error: error }) %>
+<div class='level level7 rounded'>
+  <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt' />
