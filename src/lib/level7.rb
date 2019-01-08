@@ -44,7 +44,7 @@ module Cryptorama
       end
 
       erb :level7, :locals => {
-        :completed => session[:level5][:completed],
+        :completed => session[:level7][:completed],
         :message   => message.join("<br />"),
         :error     => error,
 
