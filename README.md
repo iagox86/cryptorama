@@ -1,7 +1,7 @@
 Cryptorama!
 
 This is a fun series of crypto challenges that I designed to go along with
-[a crypto workshop](https://drive.google.com/drive/u/0/folders/1rF_Wn1t31lK-EXofOAT58nDc7ZUDSGSt)
+[a crypto workshop](https://drive.google.com/open?id=1nJB-PbDxTDDZFniFW1N3-N7stVavPe9bP7MMZgGbCvc)
 I created.
 
 # Running
