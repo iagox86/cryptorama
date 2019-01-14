@@ -50,7 +50,7 @@ module Cryptorama
     end
 
     post '/level1' do
-      if params[:answer].downcase == LEVEL1[:answer].downcase
+      if params[:answer].downcase.index(LEVEL1[:answer].downcase)
         session[:level2][:open] = true
         session[:level1][:completed] = true
 
