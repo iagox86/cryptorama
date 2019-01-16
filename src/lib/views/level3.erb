@@ -12,6 +12,27 @@
   are equally vulnerable! Try one, if you have time, try both!
 </p>
 
+<%=
+  erb(:hint, locals: {
+    hint_name: "ECB Hint",
+    hint: 'Try entering 30 "A"s into the! Is there a pattern?'
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "ECB Hint 2",
+    hint: 'Make sure you put a comma before and after a variable!'
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Salsa20 Hint",
+    hint: 'Try XORing bytes and looking at the output!'
+  })
+%>
+
 <div class='level level3 rounded'>
   <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 

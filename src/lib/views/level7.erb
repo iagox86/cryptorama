@@ -8,9 +8,26 @@
   format as Level 6. In hex, of course.
 </p>
 
-<p>
-  Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>this blog post</a> might help!
-</p>
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Your solution from Level 5 will help a lot!"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Your solution from Level 6 will also help a lot!"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "<a href='https://github.com/iagox86/poracle'>poracle</a> has an encrypt() function, too!"
+  })
+%>
 
 <div class='level level7 rounded'>
   <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
@@ -28,7 +45,7 @@
 </div>
 
 <div class='answer'>
-  <p>What is TODO</p>
+  <p>What is code you get for submitting your answer?</p>
 
   <%= erb :answer %>
 </div>

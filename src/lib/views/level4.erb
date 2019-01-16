@@ -11,16 +11,37 @@
 </p>
 
 <p>
-  Dr. Z has the password that we need to continue, but can you break all of
-  them? Hint: All passwords on this site are required to be lowercase
-  <a href='http://downloads.skullsecurity.org/passwords/english.txt.bz2'>English words</a>.
-  (No, I don't know what he was thinking...)
+  Dr. Z has the password that we need to continue, so definitely crack his! But
+  if you have time, wanna try some others?
 </p>
 
-<p>
-  Hint: John the Ripper with the "Jumbo" patch should be able to crack each
-  of these formats, but you may need the `--format=` string on some!
-</p>
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint 1: Tool",
+    hint: 'John the Ripper with the "Jumbo" patch can crack the formats you need'
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint 2: Wordlist",
+    hint: "The hashes are 100% lowercase <a href='http://downloads.skullsecurity.org/passwords/english.txt.bz2'>English words</a> - no, I have no idea what Dr.Z was thinking!"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint 3: Format",
+    hint: "Dr.Z's password hash is easy to crack, but you might need to use --format in JtR!"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint 4: Password-optimized hashes",
+    hint: "There is a pretty good chance you won't be able to crack the password-optimized hashes at all - don't worry about it!"
+  })
+%>
 
 <div class='level level4 rounded'>
   <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
@@ -39,7 +60,7 @@ dr.z:<%= hash_ntlm(LEVEL4[:answer]) %>
 
   <p>Salted passwords</p>
 
-  <p>Notice that when you refresh the page, these change?</p>
+  <p>Notice that when you refresh the page, these change? But, you can still crack them quite quickly?</p>
 
   <pre class='code'>
 # Classic UNIX DES (salted 8-bit DES)
@@ -56,8 +77,8 @@ ma:<%= hash_mediawiki('evil') %>
   <p>Password-optimized hashes</p>
 
   <p>
-    Even though these are similarly simple password, how many have you been
-    able to crack?
+    Even though these are similarly simple password, can you even crack them?
+    How slow is it running?
   </p>
 
   <pre class='code'>
