@@ -11,9 +11,40 @@
   Can you decrypt it?
 </p>
 
-<p>
-  Hint: <a href='https://github.com/iagox86/poracle'>This tool</a> might help, or the blog posts <a href='https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth'>here</a> and <a href='https://blog.skullsecurity.org/2016/going-the-other-way-with-padding-oracles-encrypting-arbitrary-data'>here</a>.
-</p>
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "There might be a padding oracle here..."
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Have you read <a href='https://blog.skullsecurity.org/2013/padding-oracle-attacks-in-depth'>this blog post</a>?"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "What about <a href='https://blog.skullsecurity.org/2013/a-padding-oracle-example'>this one</a>?"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Have you tried <a href='https://github.com/iagox86/poracle'>Poracle</a>?"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "You'll want to use Poracle's decrypt_with_embedded_iv()"
+  })
+%>
 
 <p>
   Dr. Z, the fool, gives overly verbose output and embeds the IV! Use that to

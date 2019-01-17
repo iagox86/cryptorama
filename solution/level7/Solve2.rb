@@ -20,11 +20,10 @@ BLOCKSIZE = 16
 
 # Grab the data from the commandline, if they passed it
 TOKEN = ARGV[0]
-NEW_SCRIPT = ARGV[1]
-NEW_SIGNATURE = ARGV[2]
+NEW_JSON = ARGV[1]
 
-if(NEW_SIGNATURE.nil?)
-  L.fatal("Usage: ruby Solve2.rb <token> <new script in Base64> <new signature>")
+if(NEW_JSON.nil?)
+  L.fatal("Usage: ruby Solve2.rb <token> <new json>")
   exit
 end
 
@@ -53,16 +52,16 @@ poracle = Poracle.new(BLOCKSIZE) do |data|
 
   #L.debug("Errors: %s" % errors.join(', '))
 
+  #puts(errors)
+
   # Return true if there are zero errors
   errors.empty?
 end
 
-new_data = '{"codename":"money_making_scheme","signature_alg":"sha256","script":"' + NEW_SCRIPT + '","secret_length":16,"signature":"' + NEW_SIGNATURE + '"}'
-
-L.info("Trying to encrypt: %s" % new_data)
+L.info("Trying to encrypt: %s" % NEW_JSON)
 
 # Encrypt
-result = poracle.encrypt(new_data)
+result = poracle.encrypt(NEW_JSON)
 
 puts("-----------------------------")
 puts("Encryption result")

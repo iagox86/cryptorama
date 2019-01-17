@@ -12,6 +12,27 @@
   are equally vulnerable! Try one, if you have time, try both!
 </p>
 
+<%=
+  erb(:hint, locals: {
+    hint_name: "ECB Hint",
+    hint: 'Try entering 30 "A"s into the! Is there a pattern?'
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "ECB Hint 2",
+    hint: 'Make sure you put a comma before and after a variable!'
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Salsa20 Hint",
+    hint: 'Try XORing bytes and looking at the output!'
+  })
+%>
+
 <div class='level level3 rounded'>
   <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>
 
@@ -20,15 +41,15 @@
     <p>First name <input type='text' class='name' name='first_name', value='<%= first_name %>' /></p>
     <p>Last name  <input type='text' class='name' name='last_name',  value='<%= last_name %>' /></p>
     <p>is_admin? <input type='text' class='name' disabled='1' value='0' /></p>
-    <p><input type='submit' value='Submit encrypted cookie!' /></p>
+    <p><input type='submit' value='Encrypt a cookie with the above fields!' /></p>
   </form>
 
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt_ecb' />
-    <p>AES-256-ECB (block cipher) <textarea name='token' id='ecb_token'><%= ecb_token %></textarea></p>
+    <p>AES-256-ECB (block cipher) <textarea name='ecb_token' id='ecb_token'><%= ecb_token %></textarea></p>
     <p>
       <button type='button' onclick='document.getElementById("ecb_token").value = document.getElementById("ecb_token").value.replace(/ /g, "").match(/.{1,32}/g).join(" "); return 1;'>Split into blocks</button>
-      <input type='submit' value='Check cookie!' />
+      <input type='submit' value='Decrypt the encrypted cookie above!' />
     </p>
   </form>
 
@@ -36,7 +57,7 @@
 
   <form method='GET'>
     <input type='hidden' name='action' value='decrypt_salsa20' />
-    <p>Salsa20 (stream cipher) <textarea name='token' id='salsa20_token'><%= salsa20_token %></textarea></p>
+    <p>Salsa20 (stream cipher) <textarea name='salsa20_token' id='salsa20_token'><%= salsa20_token %></textarea></p>
     <p><input type='submit' value='Submit encrypted cookie!' /></p>
   </form>
 </div>

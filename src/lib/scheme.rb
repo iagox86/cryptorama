@@ -55,7 +55,7 @@ end
 
 # Note: I'm using a token here that I'm including in the URL, for the purposes
 # of not requiring a session (and therefore making this much easier to solve).
-def scheme_reset(token)
+def scheme_reset(token, with_codename=false)
   script = [
     "1. Steal the professor's package",
     "2. Hide it somewhere he'll never think to look",
@@ -64,8 +64,8 @@ def scheme_reset(token)
   ].join("\n")
 
   signing_key = _signing_key(token)
-  return {
-    'codename'      => 'money_making_scheme',
+
+  scheme = {
     'signature_alg' => 'sha256',
     'script'        => Base64.strict_encode64(script),
     'secret_length' => signing_key.length,
@@ -73,6 +73,12 @@ def scheme_reset(token)
     # Just lightly obfuscate the token so we can re-use it for this
     'signature'     => Digest::SHA256.hexdigest(signing_key + script),
   }
+
+  if(with_codename)
+    scheme['codename'] = 'money_making_scheme'
+  end
+
+  return scheme
 end
 
 def scheme_encrypt(token, scheme)
@@ -158,6 +164,10 @@ def scheme_decrypt_verify(token, data)
   decrypted = scheme_decrypt(token, data)
   decrypted = decrypted.force_encoding('ASCII-8BIT')
   decrypted = JSON.parse(decrypted)
+
+  if(!decrypted.is_a?(Hash))
+    raise(JSON::ParserError, "Value wasn't a hash!")
+  end
 
   return scheme_verify(token, decrypted)
 end
