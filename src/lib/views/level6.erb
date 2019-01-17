@@ -21,9 +21,26 @@
   For now, don't worry about encrypting it. We'll get to that!
 </p>
 
-<p>
-  Hint: <a href='https://github.com/iagox86/hash_extender'>This tool</a> will probably help!
-</p>
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Have you heard of a <a href='https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks'>hash extension attack</a>?"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "<a href='https://github.com/iagox86/hash_extender'>This tool</a> will probably help!"
+  })
+%>
+
+<%=
+  erb(:hint, locals: {
+    hint_name: "Hint",
+    hint: "Hash extender doesn't support Base64, so you'll have to convert the script yourself!"
+  })
+%>
 
 <div class='level level6 rounded'>
   <%= erb(:message_box, :locals => { completed: completed, messages: messages, errors: errors }) %>

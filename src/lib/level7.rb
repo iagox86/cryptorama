@@ -12,17 +12,23 @@ module Cryptorama
     get '/level7' do
       messages = []
       errors = []
+      reset = params[:action] == 'reset'
 
       action = params[:action]
 
       # Get the current token
-      token, msg = get_token(params, session, params[:action] == 'reset')
+      token, msg = get_token(params, session, reset)
       if(!msg.nil?)
         messages << msg
       end
 
       # Get the encrypted text from either the parameters or newly generated
-      encrypted = params[:encrypted] || session[:encrypted] || scheme_encrypt(token, scheme_reset(token))
+      if(reset)
+        messages << "Encrypting the message with a new key"
+        encrypted = scheme_encrypt(token, scheme_reset(token, true))
+      else
+        encrypted = params[:encrypted] || session[:encrypted] || scheme_encrypt(token, scheme_reset(token, true))
+      end
 
       if(action == 'decrypt')
         begin
