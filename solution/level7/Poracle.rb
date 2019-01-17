@@ -287,10 +287,11 @@ class Poracle
     last_block = (last_block_base * @blocksize)[0..@blocksize-1]
 
     result = last_block
-    data_blocks.reverse().each do |b|
+    data_blocks.reverse().each_with_index do |b, i|
       last_block = _get_block_encrypt(b, last_block)
       result = last_block + result
       @l.debug("#{result.unpack("H*")}")
+      @l.info("Finished encrypting #{i + 1} / #{data_blocks.length} blocks!")
     end
 
     return result

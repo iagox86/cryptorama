@@ -65,19 +65,20 @@ module Cryptorama
 
       if(params[:action] == 'decrypt_ecb')
         begin
-          decrypted = decrypt_aes_ecb(session, params[:token])
+          decrypted = decrypt_aes_ecb(session, params[:ecb_token])
 
           decrypted.split(',').each do |line|
             key, value = line.split('=', 2)
             if key
-              params[key.to_sym] = value
+              params[key] = value
             end
           end
 
-          if(params[:is_admin] == '1')
+          if(params['is_admin'] == '1')
             messages << "Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
           else
             errors << "Sorry, you aren't an admin! I decoded this block in AES-256-ECB:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
+            errors << "The ruby object we built is:<br/><pre>#{ERB::Util.html_escape(params.to_s)}</pre>"
           end
         rescue OpenSSL::Cipher::CipherError => e
           errors << "Problem decrypting your ciphertext: #{ERB::Util.html_escape(e.to_s)}"
@@ -85,19 +86,20 @@ module Cryptorama
       end
 
       if(params[:action] == 'decrypt_salsa20')
-          decrypted = decrypt_salsa20(session, params[:token])
+          decrypted = decrypt_salsa20(session, params[:salsa20_token])
 
           decrypted.split(',').each do |line|
             key, value = line.split('=', 2)
             if key
-              params[key.to_sym] = value
+              params[key] = value
             end
           end
 
-          if(params[:is_admin] == '1')
+          if(params['is_admin'] == '1')
             messages << "Salsa20: Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
           else
             errors << "Sorry, you aren't an admin! I decoded this block in Salsa20:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
+            errors << "The ruby object we built is:<br/><pre>#{ERB::Util.html_escape(params.to_s)}</pre>"
           end
       end
 
@@ -112,8 +114,8 @@ module Cryptorama
         :errors    => errors,
         :first_name => ERB::Util.html_escape(first_name),
         :last_name => ERB::Util.html_escape(last_name),
-        :ecb_token => encrypt_aes_ecb(session, cookie),
-        :salsa20_token => encrypt_salsa20(session, cookie),
+        :ecb_token => ERB::Util.html_escape(params[:ecb_token] || encrypt_aes_ecb(session, cookie)),
+        :salsa20_token => ERB::Util.html_escape(params[:salsa20_token] || encrypt_salsa20(session, cookie)),
       }
     end
 

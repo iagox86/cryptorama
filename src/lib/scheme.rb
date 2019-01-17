@@ -165,5 +165,9 @@ def scheme_decrypt_verify(token, data)
   decrypted = decrypted.force_encoding('ASCII-8BIT')
   decrypted = JSON.parse(decrypted)
 
+  if(!decrypted.is_a?(Hash))
+    raise(JSON::ParserError, "Value wasn't a hash!")
+  end
+
   return scheme_verify(token, decrypted)
 end
