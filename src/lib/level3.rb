@@ -76,6 +76,7 @@ module Cryptorama
 
           if(params['is_admin'] == '1')
             messages << "Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
+            messages << "Btw, your block decrypted to: <pre>#{ERB::Util.html_escape(decrypted)}</pre>"
           else
             errors << "Sorry, you aren't an admin! I decoded this block in AES-256-ECB:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
             errors << "The ruby object we built is:<br/><pre>#{ERB::Util.html_escape(params.to_s)}</pre>"
@@ -97,6 +98,7 @@ module Cryptorama
 
           if(params['is_admin'] == '1')
             messages << "Salsa20: Congratulations, you are an admin! Dr. Z's secret site name is: <span class='highlight'>#{LEVEL3[:answer]}</span>"
+            messages << "Btw, your block decrypted to: <pre>#{ERB::Util.html_escape(decrypted)}</pre>"
           else
             errors << "Sorry, you aren't an admin! I decoded this block in Salsa20:<br/><pre>#{ERB::Util.html_escape(decrypted)}</pre>"
             errors << "The ruby object we built is:<br/><pre>#{ERB::Util.html_escape(params.to_s)}</pre>"
