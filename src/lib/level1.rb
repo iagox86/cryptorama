@@ -3,7 +3,7 @@ require 'base64'
 require 'base32'
 
 def base64(text)
-  return Base64.encode64(text)
+  return Base64.strict_encode64(text)
 end
 
 def hex(text)

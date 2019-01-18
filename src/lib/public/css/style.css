@@ -69,6 +69,7 @@ footer {
   text-align: center;
   font-weight: bold;
   font-size: 1.1em;
+  word-wrap: break-word;
 }
 
 .level textarea {
@@ -80,6 +81,7 @@ footer {
   border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f8f8f8;
+  font-family: "Lucida Console", Monaco, monospace;
 }
 
 .level1 {
@@ -128,19 +130,19 @@ tt {
 }
 
 .spoiler {
-  color: white;
-  background-color: white;
+  color: #404040;
+  background-color: #404040;
 }
 
 .spoiler a {
-  color: white;
-  background-color: white;
+  color: #404040;
+  background-color: #404040;
   pointer-events: none;
 }
 
 .spoiler a:hover {
-  color: white;
-  background-color: white;
+  color: #404040;
+  background-color: #404040;
   pointer-events: none;
 }
 
