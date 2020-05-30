@@ -19,6 +19,6 @@ make && make run
 # Challenges
 
 See the [src/](src/) folder for the application source code and
-[solution/](solution/] for solutions.
+[solution/](solution/) for solutions.
 
 TODO: Outline the challenges here
